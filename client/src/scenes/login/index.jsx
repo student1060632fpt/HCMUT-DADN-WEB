@@ -15,8 +15,8 @@ const Login = ({ reload, setReload }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const form = { email, password };
-      const { data } = await loginUser(form);
+      const data = { name: email, email, password };
+      // const { data } = await loginUser(form);
       const name = data?.name;
       dispatch(setUserInfo({ email, name }));
       localStorage.setItem("name", name);
@@ -28,8 +28,9 @@ const Login = ({ reload, setReload }) => {
         navigate("/");
         return;
       }
-    } catch (error) {}
-    toast.error("Something wrong");
+    } catch (error) {
+      toast.error("Something wrong");
+    }
   };
 
   return (
@@ -38,7 +39,7 @@ const Login = ({ reload, setReload }) => {
         <div className={styles.screen__content}>
           <form onSubmit={handleSubmit} className={styles.login}>
             <div className={styles.login__field}>
-              <i class={`${styles.login__icon} fas fa-user`}></i>
+              <i className={`${styles.login__icon} fas fa-user`}></i>
               <input
                 type="text"
                 className={styles.login__input}
@@ -47,7 +48,7 @@ const Login = ({ reload, setReload }) => {
               />
             </div>
             <div className={styles.login__field}>
-              <i class={`${styles.login__icon} fas fa-lock`}></i>
+              <i className={`${styles.login__icon} fas fa-lock`}></i>
               <input
                 type="password"
                 className={styles.login__input}
